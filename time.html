@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Elektron Saat</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body,
+      html {
+        height: 100%;
+        display: grid;
+        place-items: center;
+        background-color: #000;
+      }
+
+      .main-container {
+        height: 100px;
+        width: 360px;
+        background: linear-gradient(135deg, #14ffe9, #ffeb3b, #ff00e0);
+        border-radius: 10px;
+        animation: animate 1.5s linear infinite;
+      }
+
+      @keyframes animate {
+        100% {
+          filter: hue-rotate(360deg);
+        }
+      }
+      .main-container .display {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 999;
+        background: #1b1b1b;
+        height: 85px;
+        width: 345px;
+        border-radius: 6px;
+        text-align: center;
+      }
+
+      .main-container .display #time {
+        line-height: 85px;
+        color: #fff;
+        font-size: 50px;
+        font-weight: 600;
+        letter-spacing: 1px;
+        z-index: -1 !important;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="main-container">
+      <div class="display">
+        <div id="time"></div>
+      </div>
+    </div>
+    <script>
+      setInterval(() => {
+        const time = document.querySelector("#time");
+        let date = new Date();
+        let hours = date.getHours();
+        let minute = date.getMinutes();
+        let second = date.getSeconds();
+        let day_nights="AM"
+        if (hours > 12) {
+          hours = hours - 12;
+          day_nights="PM"
+        }
+
+        if(hours<10)
+        {
+            hours="0"+hours;
+        }
+        if(minute<10)
+        {
+            minute="0"+minute;
+        }
+
+        if(second<10)
+        {
+            second="0"+second;
+        }
+
+        time.innerText = hours + ":" + minute + ":" + second+" "+day_nights;
+      });
+    </script>
+  </body>
+</html>
